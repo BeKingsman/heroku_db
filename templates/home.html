@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+home page
+
+<div class="container">
+Dber Details
+    </div>
+    <div class="container">
+    .
+        </div>
+        <div class="container">
+        <h1>Dber Details</h1>
+        </div>
+
+
+
+        <form method="POST">
+            {% csrf_token %}
+            <div>
+                <!-- <div>
+                    <label for="adhaar">Adhaar no.</label><br>
+                <input type="text" name="adhaar" id="adhaar">
+                </div> -->
+                <div class="container">
+                    <h2><label for="name">name</label><br></h2>
+              <input type="text" name="name" id="name" value="all">
+                </div>
+                <div class="container">
+                <h2>    <label for="state">state</label><br></h2>
+                <input type="text" name="state" id="state" value="all">
+                </div>
+                <div class="container">
+                <h2>    <label for="city">city</label><br></h2>
+                <input type="text" name="city" id="city" value="all">
+                </div>
+                <!-- <div>
+                    <label for="query">Search</label><br>
+                <input name="query" id="query" value="all">
+                </div> -->
+            <!-- <select name="field" id="field">
+      <option value="Name">Name</option>
+      <option value="City">City</option>
+      <option value="State">State</option>
+      <option value="Adhaar no.">Adhaar no.</option>
+    </select> -->
+
+
+    <div class="container">
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+     </form>
+     <ul>
+         <div class="container">
+{% for obj in list %}
+{% if obj.is_staff != True %}
+<li><h4>
+    name = {{obj.user_profile.name}}
+    </h4>
+</li>
+<li><h4>
+    adhaar number = {{obj.user_profile.adhaar_no}}
+    </h4>
+    </li>
+    <li>
+    <h4>
+    <a href="{% url 'dber_mail'%}">email = {{obj.user_profile.email}}</a>
+    </h4>
+</li>
+<li><h4>
+    -----------------------
+    </h4>
+</li>
+{% endif %}
+{% endfor %}
+</div>
+</ul>
+{% endblock %}

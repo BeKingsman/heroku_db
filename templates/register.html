@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+<div>
+        <h3>.</h3>
+
+</div>
+<h3>.</h3><div>
+
+
+</div>
+<div>
+        <h3>Register Here</h3>
+<form method="post" class="login_form">
+    {% csrf_token %}
+    {{ r_form.as_p }}
+</div>
+<div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</div>
+<div><h6>
+    already have an account...?
+  <a href="{%url 'dber-login'%}" class="btn btn-primary">LogIn</a>
+</h6>
+</div>
+</form>
+
+
+{% endblock %}

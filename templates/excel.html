@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+<div class="container">
+<h1>.</h1>
+
+</div>
+<div class="container">
+<form method="post" class="login_form" enctype= "multipart/form-data" novalidate>
+    {% csrf_token %}
+    {{ form.as_p }}
+    <div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+    </form>    
+</div>
+
+    <div class="container">
+        <div><h6>or</h6></div>
+    </div>
+    <h3>Enter details of new user </h3>
+<form method="post" id="personForm" data-cities-url2="{% url 'ajax_load_cities' %}">
+{% csrf_token %}
+{{ user_form.as_p }}
+
+        <div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</div>
+</form>
+
+ <!-- <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+ <script>
+   $("#id_state").change(function () {
+     var url = $("#personForm").attr("data-cities-url2");  // get the url of the `load_cities` view
+     var stateId = $(this).val();  // get the selected state ID from the HTML input
+     $.ajax({                       // initialize an AJAX request
+       url: url,                    // set the url of the request (= localhost:8000/hr/ajax/load-cities/)
+       data: {
+         'state': stateId       // add the state id to the GET parameters
+       },
+       success: function (data) {  // `data` is the return of the `load_cities` view function
+          $("#id_city").html(data);  // replace the contents of the city input with the data that came from the server
+        }
+      });
+    });
+  </script> -->
+{% endblock %}
