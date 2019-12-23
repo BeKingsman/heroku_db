@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
+import django_heroku
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -25,7 +26,7 @@ SECRET_KEY = '6!ijkl#2#l*emudsy#3k5^kzg#yrqg_*)bufj&*ic7+jbdbn!8'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['firstdbproject.herokuapp.com']
 
 
 # Application definition
@@ -128,13 +129,18 @@ USE_L10N = True
 
 USE_TZ = True
 
-
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
-
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
+)
+
 SEND_GRID_API_KEY = os.getenv(
     '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')
 
@@ -144,5 +150,5 @@ EMAIL_HOST_USER = 'ayush_123'
 EMAIL_HOST_PASSWORD = 'ayush@123'
 EMAIL_PORT = 587
 
-
+django_heroku.settings(locals())
 # Mail is sent using the SMTP host and port specified in the EMAIL_HOST and EMAIL_PORT settings. The EMAIL_HOST_USER and EMAIL_HOST_PASSWORD settings, if set, are used to authenticate to the SMTP server, and the EMAIL_USE_TLS and EMAIL_USE_SSL settings control whether a secure connection is used.
