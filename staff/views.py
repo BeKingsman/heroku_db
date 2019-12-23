@@ -32,18 +32,20 @@ from django.contrib.auth.decorators import login_required
 def upload_excel(request):
  if request.user.is_staff==True:
    if request.method == 'POST':
-
+       s_city = request.user.staff.city.name
        userform = user_form(request.POST)
        excelform = excel_form(request.POST,request.FILES)
        if(userform.is_valid()):
-           userform.save()
+           g_city = request.POST['city']
+           if s_city == g_city:
+               userform.save()
 
            return redirect('home-page')
        elif(excelform.is_valid()):
            excelform.instance.uploaded_by = request.user
            x = excelform.save()
            path = str(excelform.instance.sheet.path)
-           user_profile_from_excel(path)
+           user_profile_from_excel(path,s_city)
            return redirect('home-page')
 
    excelform = excel_form()
@@ -59,7 +61,7 @@ def get_model(name,model):
 
 
 
-def user_profile_from_excel(path):
+def user_profile_from_excel(path,s_city):
      book = xlrd.open_workbook(path)
      sheet = book.sheet_by_index(0)
      row = sheet.nrows
@@ -79,9 +81,9 @@ def user_profile_from_excel(path):
               print(DOB)
               new = str((xlrd.xldate_as_datetime(DOB,book.datemode)))[0:10]
               birth = str(DOB)
-
-              new = user_profile.objects.create(adhaar_no=adhaar_no,name=name,DOB=new,gender= gender,city=city_model, state=state_model)
-              new.save()
+              if s_city == city:
+                  new = user_profile.objects.create(adhaar_no=adhaar_no,name=name,DOB=new,gender= gender,city=city_model, state=state_model)
+                  new.save()
 
 
 
