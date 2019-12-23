@@ -63,6 +63,14 @@ Dber Details
     adhaar number = {{obj.user_profile.adhaar_no}}
     </h4>
     </li>
+    <li><h4>
+        State = {{obj.user_profile.state.name}}
+        </h4>
+        </li>
+        <li><h4>
+            City = {{obj.user_profile.city.name}}
+            </h4>
+            </li>
     <li>
     <h4>
     <a href="{% url 'dber_mail'%}">email = {{obj.user_profile.email}}</a>
