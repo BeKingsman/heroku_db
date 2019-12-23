@@ -178,7 +178,7 @@ def register(request):
                             user.save()
                             return redirect('dber-logout')
                         except:
-                           pass      
+                           pass
                 # print(HttpResponse("adhhar number not matched , please contact administrator"))
             # return HttpResponse("<h3>User Not Found</h3>")
             return render(request,'error.html')
@@ -223,7 +223,8 @@ def HomePage(request):
         list =[]
         for x in klist:
             if x.is_staff != True:
-                list.append(x)
+                if x.is_superuser != True:
+                   list.append(x)
 
         if request.method == 'POST':
             # adhaar = request.POST.get('adhaar')
