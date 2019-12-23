@@ -137,9 +137,9 @@ STATIC_URL = '/static/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'static'),
-)
+# STATICFILES_DIRS = (
+#     os.path.join(BASE_DIR, 'static'),
+# )
 
 SEND_GRID_API_KEY = os.getenv(
     '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')
